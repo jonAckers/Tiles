@@ -8,19 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		532E837A2C441D5B00E2E76B /* TilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E83792C441D5B00E2E76B /* TilesApp.swift */; };
-		532E837C2C441D5C00E2E76B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E837B2C441D5C00E2E76B /* ContentView.swift */; };
 		532E837E2C441D5C00E2E76B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532E837D2C441D5C00E2E76B /* Assets.xcassets */; };
 		532E83812C441D5C00E2E76B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532E83802C441D5C00E2E76B /* Preview Assets.xcassets */; };
 		532E838B2C441EB400E2E76B /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E838A2C441EB400E2E76B /* BoardView.swift */; };
+		532E838D2C44281300E2E76B /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E838C2C44281300E2E76B /* GameView.swift */; };
+		532E838F2C44320200E2E76B /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E838E2C44320200E2E76B /* TileView.swift */; };
+		532E83912C4434CB00E2E76B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E83902C4434CB00E2E76B /* Tile.swift */; };
+		532E83932C446C6600E2E76B /* TileMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E83922C446C6600E2E76B /* TileMatrix.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		532E83762C441D5B00E2E76B /* Tiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532E83792C441D5B00E2E76B /* TilesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilesApp.swift; sourceTree = "<group>"; };
-		532E837B2C441D5C00E2E76B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		532E837D2C441D5C00E2E76B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532E83802C441D5C00E2E76B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		532E838A2C441EB400E2E76B /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		532E838C2C44281300E2E76B /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		532E838E2C44320200E2E76B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
+		532E83902C4434CB00E2E76B /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		532E83922C446C6600E2E76B /* TileMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMatrix.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +62,6 @@
 				532E83892C441DF400E2E76B /* Models */,
 				532E83872C441DBC00E2E76B /* Views */,
 				532E83792C441D5B00E2E76B /* TilesApp.swift */,
-				532E837B2C441D5C00E2E76B /* ContentView.swift */,
 				532E837D2C441D5C00E2E76B /* Assets.xcassets */,
 				532E837F2C441D5C00E2E76B /* Preview Content */,
 			);
@@ -75,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				532E838A2C441EB400E2E76B /* BoardView.swift */,
+				532E838C2C44281300E2E76B /* GameView.swift */,
+				532E838E2C44320200E2E76B /* TileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,6 +89,8 @@
 		532E83892C441DF400E2E76B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				532E83902C4434CB00E2E76B /* Tile.swift */,
+				532E83922C446C6600E2E76B /* TileMatrix.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,7 +166,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				532E838B2C441EB400E2E76B /* BoardView.swift in Sources */,
-				532E837C2C441D5C00E2E76B /* ContentView.swift in Sources */,
+				532E838D2C44281300E2E76B /* GameView.swift in Sources */,
+				532E83912C4434CB00E2E76B /* Tile.swift in Sources */,
+				532E838F2C44320200E2E76B /* TileView.swift in Sources */,
+				532E83932C446C6600E2E76B /* TileMatrix.swift in Sources */,
 				532E837A2C441D5B00E2E76B /* TilesApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

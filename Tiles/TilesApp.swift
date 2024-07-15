@@ -9,9 +9,18 @@ import SwiftUI
 
 @main
 struct TilesApp: App {
+
+    // MARK: - Properties
+    let backgroundColor = Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ZStack {
+                Color(backgroundColor)
+                    .ignoresSafeArea()
+
+                GameView()
+            }
         }
     }
 }
