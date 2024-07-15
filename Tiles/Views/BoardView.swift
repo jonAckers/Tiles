@@ -11,6 +11,7 @@ struct BoardView: View {
 
     // MARK: - Properties
     let backgroundColor = Color(red: 0.26, green:0.32, blue: 0.27, opacity: 1)
+    let backgroundBoard: [Tile]
 
     let board: TileMatrix
     var columns: [GridItem]
@@ -18,16 +19,27 @@ struct BoardView: View {
     // MARK: - Initialiser
     init(_ board: TileMatrix) {
         self.board = board
-        self.columns = Array(repeating: GridItem(.flexible()), count: self.board.size)
+        columns = Array(repeating: GridItem(.flexible()), count: board.size)
+
+        let numTiles = board.size * board.size
+        backgroundBoard = (0..<numTiles).map { _ in Tile() }
     }
 
     // MARK: - Conformance to View Protocol
     var body: some View {
         GeometryReader { proxy in
             ZStack {
-                LazyVGrid(columns: self.columns) {
-                    // Create background tiles
-                    ForEach(self.board.flatMatrix, id:\.self.id) { tile in
+                // Create background tiles
+                LazyVGrid(columns: columns) {
+                    ForEach(backgroundBoard, id:\.self.id) { tile in
+                        TileView(tile)
+                    }
+                }
+                .padding(10)
+
+                // Create moveable tiles
+                LazyVGrid(columns: columns) {
+                    ForEach(board.flatMatrix, id:\.self.id) { tile in
                         TileView(tile)
                     }
                 }

@@ -9,10 +9,12 @@ import SwiftUI
 
 struct GameView: View {
     
-    let board: TileMatrix
+    var board: TileMatrix
 
     init() {
-        self.board = TileMatrix()
+        board = TileMatrix()
+
+        board.createTile()
     }
 
     var body: some View {
@@ -24,7 +26,7 @@ struct GameView: View {
 
             Spacer()
 
-            BoardView(self.board)
+            BoardView(board)
 
             Spacer()
             Spacer()

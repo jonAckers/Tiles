@@ -9,13 +9,13 @@ import SwiftUI
 
 typealias TileColor = (background: Color, font: Color)
 
-struct Tile: Identifiable {
+class Tile: Identifiable {
 
     // MARK: - Properties
     let id = UUID()
     var value: Int?
 
-    private var colors: [TileColor] = [
+    private let colors: [TileColor] = [
        /*     0 */ (Color(red: 0.32, green: 0.39, blue: 0.33, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
        /*     2 */ (Color(red: 0.90, green: 0.94, blue: 0.90, opacity: 1), Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)),
        /*     4 */ (Color(red: 0.72, green: 0.82, blue: 0.72, opacity: 1), Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)),
@@ -50,7 +50,7 @@ struct Tile: Identifiable {
 
     // MARK: - Initialiser
     init() {
-        self.value = nil
+        value = nil
     }
 
     init(_ value: Int) {

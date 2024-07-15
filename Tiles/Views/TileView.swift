@@ -20,14 +20,14 @@ struct TileView: View {
     // MARK: - Conformance to View Protocol
     var body: some View {
         ZStack {
-            Color(self.tile.backgroundColor)
+            Color(tile.backgroundColor)
                 .aspectRatio(contentMode: .fit)
 
-            Text(self.tile.strValue)
+            Text(tile.strValue)
                 .font(.system(size: 42,
                               weight: .bold,
                               design: .monospaced))
-                .foregroundColor(self.tile.fontColor)
+                .foregroundColor(tile.fontColor)
                 .minimumScaleFactor(0.01)
                 .padding(5)
         }
