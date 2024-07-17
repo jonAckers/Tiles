@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct GameView: View {
-    
-    var board: TileMatrix
+    // MARK: - Properties
+
+    @ObservedObject var board: TileMatrix
+
+    // MARK: - Initialiser
 
     init() {
         board = TileMatrix()
-
         board.createTile()
     }
+
+    // MARK: - Conformance to View Protocol
 
     var body: some View {
         VStack {
@@ -27,6 +31,7 @@ struct GameView: View {
             Spacer()
 
             BoardView(board)
+                .aspectRatio(contentMode: .fit)
 
             Spacer()
             Spacer()
