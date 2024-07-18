@@ -72,4 +72,87 @@ class TileMatrix: ObservableObject {
 
         return true
     }
+
+    func move(_ direction: Direction) {
+        var moved = false
+
+        let axis = direction == .left || direction == .right
+        let negativeDir = direction == .left || direction == .up
+
+        for i in 0 ..< size {
+            var lineSnapshot = [Tile?]()
+            var compactLine = [Tile]()
+
+            // Transpose if necessary.
+            for j in 0 ..< size {
+                if let tile = self[axis ? (j, i) : (i, j)] {
+                    lineSnapshot.append(tile)
+                    compactLine.append(tile)
+                } else {
+                    lineSnapshot.append(nil)
+                }
+            }
+
+            // Merge tiles.
+            merge(&compactLine, reverse: !negativeDir)
+
+            // Create new line.
+            var newLine = [Tile?]()
+            compactLine.forEach { newLine.append($0) }
+            for _ in 0 ..< (4 - compactLine.count) {
+                if negativeDir {
+                    newLine.append(nil)
+                } else {
+                    newLine.insert(nil, at: 0)
+                }
+            }
+
+            // Add new line to matrix.
+            newLine.enumerated().forEach { j, tile in
+                // TODO: workout why it gets in here when the board hasn't changed
+                if lineSnapshot[j]?.value != tile?.value {
+                    moved = true
+                }
+                insert(tile, at: axis ? (j, i) : (i, j))
+            }
+        }
+
+        // Create new tile if move occurred.
+        if moved {
+            createTile()
+        }
+    }
+
+    // MARK: - Private Methods
+
+    private func merge(_ tiles: inout [Tile], reverse: Bool) {
+        if reverse {
+            tiles = tiles.reversed()
+        }
+
+        tiles = tiles
+            .map { (false, $0) }
+            .reduce([(Bool, Tile)]()) { acc, tile in
+                if acc.last?.0 == false && acc.last?.1.value == tile.1.value {
+                    var accPrefix = Array(acc.dropLast())
+                    var mergedTile = tile.1
+                    mergedTile.value *= 2
+                    accPrefix.append((true, mergedTile))
+                    return accPrefix
+                } else {
+                    var accTmp = acc
+                    accTmp.append((false, tile.1))
+                    return accTmp
+                }
+            }
+            .map { $0.1 }
+
+        if reverse {
+            tiles = tiles.reversed()
+        }
+    }
+
+    private func insert(_ tile: Tile?, at: Index) {
+        matrix[at.1][at.0] = tile
+    }
 }
