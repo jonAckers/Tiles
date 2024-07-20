@@ -60,8 +60,14 @@ struct TileView: View {
                 .foregroundColor(fontColor)
                 .minimumScaleFactor(0.01)
                 .padding(5)
+                .id(tile?.value)
+                .transition(
+                    AnyTransition
+                        .scale(scale: 0.2)
+                        .combined(with: .opacity)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.777, blendDuration: 0.3))
+                )
         }
-        .zIndex(Double.greatestFiniteMagnitude)
         .clipped()
         .cornerRadius(5)
     }

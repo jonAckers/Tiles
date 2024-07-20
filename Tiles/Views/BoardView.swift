@@ -74,7 +74,7 @@ struct BoardView: View {
                 in: CGRect(x: 0, y: 0, width: frameSize, height: frameSize)
             ))
             .animation(
-                .interpolatingSpring(stiffness: 800, damping: 200),
+                .interpolatingSpring(stiffness: 800, damping: 300, initialVelocity: 0.6),
                 value: position
             )
     }
