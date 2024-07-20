@@ -35,10 +35,8 @@ struct BoardView: View {
                 }
 
                 // Create moveable tiles
-                ForEach(0 ..< board.size, id: \.self) { i in
-                    ForEach(0 ..< board.size, id: \.self) { j in
-                        createTile(board[(i, j)], at: (i, j), proxy: proxy)
-                    }
+                ForEach(board.flatten(), id: \.tile.id) { item in
+                    createTile(item.tile, at: item.index, proxy: proxy)
                 }
             }
             .background {
@@ -60,6 +58,7 @@ struct BoardView: View {
 
         let spacing = calculateTileSpacing(proxy)
         let tileSize = calculateTileSize(proxy, padding: spacing)
+        let frameSize = calculateFrameSize(proxy)
 
         let position = CGPoint(
             x: CGFloat(index.0) * (tileSize + spacing) + tileSize / 2 + spacing,
@@ -69,6 +68,15 @@ struct BoardView: View {
         return view
             .frame(width: tileSize, height: tileSize, alignment: .center)
             .position(x: position.x, y: position.y)
+            .transition(.tileGenerated(
+                from: board.lastMoveDir.edge,
+                position: CGPoint(x: position.x, y: position.y),
+                in: CGRect(x: 0, y: 0, width: frameSize, height: frameSize)
+            ))
+            .animation(
+                .interpolatingSpring(stiffness: 800, damping: 200),
+                value: position
+            )
     }
 
     private func calculateTileSize(_ proxy: GeometryProxy, padding: CGFloat) -> CGFloat {
@@ -78,6 +86,11 @@ struct BoardView: View {
 
     private func calculateTileSpacing(_ proxy: GeometryProxy) -> CGFloat {
         return (proxy.size.width / 300) * 8 // Create 8 pixels of spacing for every 300 pixels of tile
+    }
+
+    private func calculateFrameSize(_ proxy: GeometryProxy) -> CGFloat {
+        let padding = proxy.size.width / 10
+        return proxy.size.width - padding
     }
 }
 

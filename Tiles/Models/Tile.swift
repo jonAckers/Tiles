@@ -9,7 +9,7 @@ import SwiftUI
 
 typealias TileColor = (background: Color, font: Color)
 
-struct Tile {
+struct Tile: Identifiable {
     // MARK: - Static Properties
 
     static let emptyColor = Color(red: 0.32, green: 0.39, blue: 0.33, opacity: 1)
@@ -33,6 +33,7 @@ struct Tile {
 
     // MARK: - Properties
 
+    let id = UUID()
     var value: Int
 
     // MARK: - Computed Properties

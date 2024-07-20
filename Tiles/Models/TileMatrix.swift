@@ -14,12 +14,7 @@ class TileMatrix: ObservableObject {
 
     let size: Int
     @Published private(set) var matrix: [[Tile?]]
-
-    // MARK: - Computed Properties
-
-    var flatMatrix: [Tile?] {
-        return matrix.reduce([], +)
-    }
+    @Published private(set) var lastMoveDir: Direction = .up
 
     // MARK: - Initialiser
 
@@ -44,6 +39,17 @@ class TileMatrix: ObservableObject {
         }
 
         return matrix[index.1][index.0]
+    }
+
+    func flatten() -> [IndexedTile] {
+        matrix.enumerated().flatMap { (y: Int, row: [Tile?]) in
+            row.enumerated().compactMap { (x: Int, tile: Tile?) in
+                guard let tile = tile else {
+                    return nil
+                }
+                return IndexedTile(index: (x, y), tile: tile)
+            }
+        }
     }
 
     @discardableResult
@@ -119,7 +125,9 @@ class TileMatrix: ObservableObject {
 
         // Create new tile if move occurred.
         if moved {
-            createTile()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.025 * TimeInterval(size)) {
+                self.createTile()
+            }
         }
     }
 

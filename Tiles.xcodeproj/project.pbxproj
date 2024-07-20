@@ -16,6 +16,11 @@
 		532E838F2C44320200E2E76B /* TileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E838E2C44320200E2E76B /* TileView.swift */; };
 		532E83912C4434CB00E2E76B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E83902C4434CB00E2E76B /* Tile.swift */; };
 		532E83932C446C6600E2E76B /* TileMatrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E83922C446C6600E2E76B /* TileMatrix.swift */; };
+		53D1D84F2C4C187600ABB8DF /* IndexedTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1D84E2C4C187600ABB8DF /* IndexedTile.swift */; };
+		53D1D8522C4C19F200ABB8DF /* AnyTransition+TileGenerated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1D8512C4C19F200ABB8DF /* AnyTransition+TileGenerated.swift */; };
+		53D1D8552C4C1A4B00ABB8DF /* Merged.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1D8542C4C1A4B00ABB8DF /* Merged.swift */; };
+		53D1D8572C4C1A6500ABB8DF /* AnchoredScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1D8562C4C1A6500ABB8DF /* AnchoredScale.swift */; };
+		53D1D8592C4C1A7400ABB8DF /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1D8582C4C1A7400ABB8DF /* BlurEffect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +34,11 @@
 		532E838E2C44320200E2E76B /* TileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileView.swift; sourceTree = "<group>"; };
 		532E83902C4434CB00E2E76B /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		532E83922C446C6600E2E76B /* TileMatrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileMatrix.swift; sourceTree = "<group>"; };
+		53D1D84E2C4C187600ABB8DF /* IndexedTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexedTile.swift; sourceTree = "<group>"; };
+		53D1D8512C4C19F200ABB8DF /* AnyTransition+TileGenerated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyTransition+TileGenerated.swift"; sourceTree = "<group>"; };
+		53D1D8542C4C1A4B00ABB8DF /* Merged.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merged.swift; sourceTree = "<group>"; };
+		53D1D8562C4C1A6500ABB8DF /* AnchoredScale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnchoredScale.swift; sourceTree = "<group>"; };
+		53D1D8582C4C1A7400ABB8DF /* BlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +71,8 @@
 		532E83782C441D5B00E2E76B /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				53D1D8502C4C19D500ABB8DF /* Extensions */,
+				53D1D8532C4C1A3A00ABB8DF /* View Modifiers */,
 				532E83892C441DF400E2E76B /* Models */,
 				532E83872C441DBC00E2E76B /* Views */,
 				532E83792C441D5B00E2E76B /* TilesApp.swift */,
@@ -94,8 +106,27 @@
 				532E83902C4434CB00E2E76B /* Tile.swift */,
 				532E83922C446C6600E2E76B /* TileMatrix.swift */,
 				530EAA122C45939400B3F4C7 /* Direction.swift */,
+				53D1D84E2C4C187600ABB8DF /* IndexedTile.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		53D1D8502C4C19D500ABB8DF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				53D1D8512C4C19F200ABB8DF /* AnyTransition+TileGenerated.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		53D1D8532C4C1A3A00ABB8DF /* View Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				53D1D8542C4C1A4B00ABB8DF /* Merged.swift */,
+				53D1D8562C4C1A6500ABB8DF /* AnchoredScale.swift */,
+				53D1D8582C4C1A7400ABB8DF /* BlurEffect.swift */,
+			);
+			path = "View Modifiers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,10 +202,15 @@
 				530EAA132C45939400B3F4C7 /* Direction.swift in Sources */,
 				532E838B2C441EB400E2E76B /* BoardView.swift in Sources */,
 				532E838D2C44281300E2E76B /* GameView.swift in Sources */,
+				53D1D84F2C4C187600ABB8DF /* IndexedTile.swift in Sources */,
 				532E83912C4434CB00E2E76B /* Tile.swift in Sources */,
 				532E838F2C44320200E2E76B /* TileView.swift in Sources */,
 				532E83932C446C6600E2E76B /* TileMatrix.swift in Sources */,
 				532E837A2C441D5B00E2E76B /* TilesApp.swift in Sources */,
+				53D1D8522C4C19F200ABB8DF /* AnyTransition+TileGenerated.swift in Sources */,
+				53D1D8592C4C1A7400ABB8DF /* BlurEffect.swift in Sources */,
+				53D1D8572C4C1A6500ABB8DF /* AnchoredScale.swift in Sources */,
+				53D1D8552C4C1A4B00ABB8DF /* Merged.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
