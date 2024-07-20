@@ -5,7 +5,7 @@
 //  Created by Jon Ackers on 14/07/2024.
 //
 
-import Foundation
+import SwiftUI
 
 typealias Index = (Int, Int)
 
@@ -15,6 +15,7 @@ class TileMatrix: ObservableObject {
     let size: Int
     @Published private(set) var matrix: [[Tile?]]
     @Published private(set) var lastMoveDir: Direction = .up
+    @Published private(set) var score: Int = 0
 
     // MARK: - Initialiser
 
@@ -42,12 +43,12 @@ class TileMatrix: ObservableObject {
     }
 
     func flatten() -> [IndexedTile] {
-        matrix.enumerated().flatMap { (y: Int, row: [Tile?]) in
-            row.enumerated().compactMap { (x: Int, tile: Tile?) in
+        matrix.enumerated().flatMap { (j: Int, row: [Tile?]) in
+            row.enumerated().compactMap { (i: Int, tile: Tile?) in
                 guard let tile = tile else {
                     return nil
                 }
-                return IndexedTile(index: (x, y), tile: tile)
+                return IndexedTile(index: (i, j), tile: tile)
             }
         }
     }
@@ -125,7 +126,7 @@ class TileMatrix: ObservableObject {
 
         // Create new tile if move occurred.
         if moved {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.025 * TimeInterval(size)) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.035 * TimeInterval(size)) {
                 self.createTile()
             }
         }
@@ -145,6 +146,7 @@ class TileMatrix: ObservableObject {
                     var accPrefix = Array(acc.dropLast())
                     var mergedTile = tile.1
                     mergedTile.value *= 2
+                    score += mergedTile.value
                     accPrefix.append((true, mergedTile))
                     return accPrefix
                 } else {

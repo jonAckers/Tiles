@@ -64,10 +64,8 @@ struct GameView: View {
 
     var body: some View {
         VStack {
-            Text("Tiles")
-                .font(.system(size: 64).weight(.black))
-                .foregroundColor(Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1))
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HeaderView(score: board.score)
+                .frame(maxHeight: 100)
 
             Spacer()
 
