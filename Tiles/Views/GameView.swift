@@ -17,7 +17,7 @@ struct GameView: View {
     // MARK: - Drag Gesture
 
     private var dragGesture: some Gesture {
-        let threshold: CGFloat = 25
+        let threshold: CGFloat = 60
 
         let drag = DragGesture()
             .onChanged { v in
