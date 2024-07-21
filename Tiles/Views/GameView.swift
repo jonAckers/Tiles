@@ -10,8 +10,9 @@ import SwiftUI
 struct GameView: View {
     // MARK: - Properties
 
-    @ObservedObject var board: TileMatrix
+    @ObservedObject var board = TileMatrix()
     @State private var ignoreGestures = false
+    @State private var presentEndGameModal = false
 
     // MARK: - Drag Gesture
 
@@ -53,13 +54,6 @@ struct GameView: View {
         return drag
     }
 
-    // MARK: - Initialiser
-
-    init() {
-        board = TileMatrix()
-        board.createTile()
-    }
-
     // MARK: - Conformance to View Protocol
 
     var body: some View {
@@ -71,6 +65,10 @@ struct GameView: View {
 
             BoardView(board)
                 .aspectRatio(contentMode: .fit)
+                .sheet(isPresented: $presentEndGameModal) {
+                    GameOverModalView(score: board.score, resetAction: board.reset)
+                        .presentationDetents([.fraction(0.3)])
+                }
 
             Spacer()
             Spacer()
@@ -78,6 +76,11 @@ struct GameView: View {
         .padding(15)
         .background(.white.opacity(0.01))
         .gesture(dragGesture)
+        .onReceive(board.$movePossible) { movePossible in
+            withAnimation(.spring) {
+                self.presentEndGameModal = !movePossible
+            }
+        }
     }
 }
 

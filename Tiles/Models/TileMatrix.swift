@@ -13,23 +13,17 @@ class TileMatrix: ObservableObject {
     // MARK: - Properties
 
     let size: Int
-    @Published private(set) var matrix: [[Tile?]]
+    @Published private(set) var matrix = [[Tile?]]()
     @Published private(set) var lastMoveDir: Direction = .up
     @Published private(set) var score: Int = 0
+    @Published private(set) var movePossible: Bool = true
 
     // MARK: - Initialiser
 
     init(_ size: Int = 4) {
         self.size = size
 
-        matrix = [[Tile]]()
-        for _ in 0 ..< size {
-            var row = [Tile?]()
-            for _ in 0 ..< size {
-                row += [nil]
-            }
-            matrix += [row]
-        }
+        reset()
     }
 
     // MARK: - Methods
@@ -51,6 +45,22 @@ class TileMatrix: ObservableObject {
                 return IndexedTile(index: (i, j), tile: tile)
             }
         }
+    }
+
+    func reset() {
+        score = 0
+        movePossible = true
+
+        matrix = [[Tile]]()
+        for _ in 0 ..< size {
+            var row = [Tile?]()
+            for _ in 0 ..< size {
+                row += [nil]
+            }
+            matrix += [row]
+        }
+
+        createTile()
     }
 
     @discardableResult
@@ -128,8 +138,34 @@ class TileMatrix: ObservableObject {
         if moved {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.035 * TimeInterval(size)) {
                 self.createTile()
+                self.movePossible = self.isMovePossible()
             }
         }
+    }
+
+    func isMovePossible() -> Bool {
+        for (j, row) in matrix.enumerated() {
+            for (i, tile) in row.enumerated() {
+                // If there's an empty tile, move is possible.
+                if tile == nil {
+                    return true
+                }
+                // If the current tile has the same value as one of it's neighbours, move is possible.
+                if i + 1 < size, tile == matrix[j][i + 1] {
+                    return true
+                }
+                if i - 1 > -1, tile == matrix[j][i - 1] {
+                    return true
+                }
+                if j + 1 < size, tile == matrix[j + 1][i] {
+                    return true
+                }
+                if j - 1 > -1, tile == matrix[j - 1][i] {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     // MARK: - Private Methods
