@@ -62,6 +62,12 @@ struct Tile: Equatable, Identifiable {
         return lhs.value == rhs.value
     }
 
+    static func getRandomTile() -> Tile {
+        // Pick random value for tile with 80% chance of 2, 20% chance of 4.
+        let value = (0 ..< 5).randomElement()! == 0 ? 4 : 2
+        return Tile(value)
+    }
+
     // MARK: - Private Methods
 
     private func getColor() -> TileColor {

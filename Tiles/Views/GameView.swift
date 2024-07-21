@@ -10,7 +10,7 @@ import SwiftUI
 struct GameView: View {
     // MARK: - Properties
 
-    @ObservedObject var board = TileMatrix()
+    @ObservedObject var board: TileMatrix
     @State private var ignoreGestures = false
     @State private var presentEndGameModal = false
 
@@ -52,6 +52,12 @@ struct GameView: View {
             }
 
         return drag
+    }
+
+    // MARK: - Initialiser
+
+    init() {
+        board = TileMatrix()
     }
 
     // MARK: - Conformance to View Protocol

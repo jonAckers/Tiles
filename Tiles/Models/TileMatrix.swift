@@ -18,12 +18,21 @@ class TileMatrix: ObservableObject {
     @Published private(set) var score: Int = 0
     @Published private(set) var movePossible: Bool = true
 
+    let defaults = UserDefaults.standard
+
+    private let BOARD_KEY = "Board"
+    private let SCORE_KEY = "Score"
+
     // MARK: - Initialiser
 
     init(_ size: Int = 4) {
         self.size = size
 
-        reset()
+        let (matrix, score) = loadState()
+        self.matrix = matrix
+        self.score = score
+
+        saveState()
     }
 
     // MARK: - Methods
@@ -50,44 +59,9 @@ class TileMatrix: ObservableObject {
     func reset() {
         score = 0
         movePossible = true
+        matrix = getStartingMatrix()
 
-        matrix = [[Tile]]()
-        for _ in 0 ..< size {
-            var row = [Tile?]()
-            for _ in 0 ..< size {
-                row += [nil]
-            }
-            matrix += [row]
-        }
-
-        createTile()
-    }
-
-    @discardableResult
-    func createTile() -> Bool {
-        // Get empty tiles.
-        var emptyTiles = [Index]()
-        for i in 0 ..< size {
-            for j in 0 ..< size {
-                if self[(i, j)] == nil {
-                    emptyTiles.append((i, j))
-                }
-            }
-        }
-
-        // Exit if there is no space for a new tile.
-        guard emptyTiles.count > 0 else { return false }
-
-        // Pick random tile.
-        let idx = emptyTiles.randomElement()!
-
-        // Pick random value for tile with 80% chance of 2, 20% chance of 4.
-        let value = (0 ..< 5).randomElement()! == 0 ? 4 : 2
-
-        // Create the new tile.
-        matrix[idx.1][idx.0] = Tile(value)
-
-        return true
+        saveState()
     }
 
     func move(_ direction: Direction) {
@@ -170,6 +144,50 @@ class TileMatrix: ObservableObject {
 
     // MARK: - Private Methods
 
+    private func getStartingMatrix() -> [[Tile?]] {
+        matrix = [[Tile]]()
+        for _ in 0 ..< size {
+            var row = [Tile?]()
+            for _ in 0 ..< size {
+                row += [nil]
+            }
+            matrix += [row]
+        }
+
+        let i = (0 ..< size).randomElement()!
+        let j = (0 ..< size).randomElement()!
+        matrix[i][j] = Tile.getRandomTile()
+
+        return matrix
+    }
+
+    @discardableResult
+    func createTile() -> Bool {
+        // Get empty tiles.
+        var emptyTiles = [Index]()
+        for i in 0 ..< size {
+            for j in 0 ..< size {
+                if self[(i, j)] == nil {
+                    emptyTiles.append((i, j))
+                }
+            }
+        }
+
+        // Exit if there is no space for a new tile.
+        guard emptyTiles.count > 0 else { return false }
+
+        // Pick random tile.
+        let idx = emptyTiles.randomElement()!
+
+        // Create the new tile.
+        matrix[idx.1][idx.0] = Tile.getRandomTile()
+
+        // Save new state of TileMatrix.
+        saveState()
+
+        return true
+    }
+
     private func merge(_ tiles: inout [Tile], reverse: Bool) {
         if reverse {
             tiles = tiles.reversed()
@@ -200,5 +218,45 @@ class TileMatrix: ObservableObject {
 
     private func insert(_ tile: Tile?, at: Index) {
         matrix[at.1][at.0] = tile
+    }
+
+    private func saveState() {
+        // Convert tile matrix into integer matrix.
+        let replica: [[Int]] = matrix.map { row in
+            row.map { tile in
+                tile?.value ?? 0
+            }
+        }
+
+        // Save data.
+        defaults.set(replica, forKey: BOARD_KEY)
+        defaults.set(score, forKey: SCORE_KEY)
+    }
+
+    private func loadState() -> ([[Tile?]], Int) {
+        // Load data.
+        let data = defaults.object(forKey: BOARD_KEY) as? [[Int]]
+
+        // If data doesn't exist, return empty matrix.
+        guard let replica = data else { return (getStartingMatrix(), 0) }
+
+        // Convert loaded data to a Tile matrix.
+        matrix = [[Tile]]()
+        for i in 0 ..< replica.count {
+            var row = [Tile?]()
+            for j in 0 ..< replica[0].count {
+                if replica[i][j] == 0 {
+                    row.append(nil)
+                } else {
+                    row.append(Tile(replica[i][j]))
+                }
+            }
+            matrix += [row]
+        }
+
+        // Load score.
+        let score = defaults.object(forKey: SCORE_KEY) as? Int ?? 0
+
+        return (matrix, score)
     }
 }
