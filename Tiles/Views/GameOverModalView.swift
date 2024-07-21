@@ -27,14 +27,16 @@ struct GameOverModalView: View {
 
             Spacer()
 
-            Button("New game?") {
+            Button {
                 resetAction()
+            } label: {
+                Text("New game?")
+                    .padding(20)
+                    .frame(maxWidth: .infinity)
+                    .background(darkColor)
+                    .clipShape(.capsule)
             }
             .tint(lightColor)
-            .padding(20)
-            .frame(maxWidth: .infinity)
-            .background(darkColor)
-            .clipShape(.capsule)
 
             Spacer()
         }
