@@ -10,10 +10,6 @@ import SwiftUI
 struct HeaderView: View {
     // MARK: - Properties
 
-    let darkColor = Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)
-    let lightColor = Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)
-    let greenColor = Color(red: 0.48, green: 0.70, blue: 0.48, opacity: 1)
-
     let score: Int
 
     @Binding var isShowingMenu: Bool
@@ -25,7 +21,7 @@ struct HeaderView: View {
             HStack {
                 Text("Tiles")
                     .font(.system(size: 64).weight(.black))
-                    .foregroundStyle(darkColor)
+                    .foregroundStyle(Color.primaryAccent)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Spacer()
@@ -33,13 +29,13 @@ struct HeaderView: View {
                 VStack {
                     Text("Score")
                         .font(.system(size: 22).weight(.black))
-                        .foregroundStyle(lightColor.opacity(0.5))
+                        .foregroundStyle(Color.secondaryAccent.opacity(0.5))
 
                     Spacer()
 
                     Text("\(score)")
                         .font(.system(size: 64, weight: .bold))
-                        .foregroundStyle(lightColor)
+                        .foregroundStyle(Color.secondaryAccent)
                         .minimumScaleFactor(0.01)
                         .contentTransition(.numericText())
                         .animation(.easeInOut(duration: 0.05), value: score)
@@ -49,7 +45,7 @@ struct HeaderView: View {
                 }
                 .frame(width: 90, height: 90)
                 .padding(5)
-                .background(darkColor)
+                .background(Color.primaryAccent)
                 .cornerRadius(5)
             }
 
@@ -62,10 +58,10 @@ struct HeaderView: View {
                     .font(.system(size: 22).weight(.bold))
                     .frame(width: 90)
                     .padding(5)
-                    .background(greenColor)
+                    .background(Color.tile8)
                     .cornerRadius(5)
             }
-            .tint(lightColor)
+            .tint(Color.alwaysLight)
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
     }

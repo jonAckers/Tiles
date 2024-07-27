@@ -34,6 +34,8 @@ class TileMatrix: ObservableObject {
         self.score = score
 
         saveState()
+
+        movePossible = isMovePossible()
     }
 
     // MARK: - Methods

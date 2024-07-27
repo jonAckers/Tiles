@@ -10,8 +10,6 @@ import SwiftUI
 struct BoardView: View {
     // MARK: - Properties
 
-    let backgroundColor = Color(red: 0.26, green: 0.32, blue: 0.27, opacity: 1)
-
     let board: TileMatrix
     var columns: [GridItem]
 
@@ -40,7 +38,7 @@ struct BoardView: View {
                 }
             }
             .background {
-                Color(backgroundColor)
+                Color.boardBackground
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .aspectRatio(contentMode: .fit)

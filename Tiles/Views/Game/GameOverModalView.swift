@@ -11,36 +11,38 @@ struct GameOverModalView: View {
     let score: Int
     let resetAction: () -> Void
 
-    let darkColor = Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)
-    let darkColorSecondary = Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 0.6)
-    let lightColor = Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)
-
     var body: some View {
-        VStack {
-            Text("Game Over!")
-                .font(.system(size: 42).weight(.black))
-                .foregroundStyle(darkColor)
+        ZStack {
+            Color.secondaryAccent
+                .ignoresSafeArea()
 
-            Text("Your score: \(score)")
-                .font(.system(size: 21).weight(.bold))
-                .foregroundStyle(darkColorSecondary)
+            VStack {
+                Text("Game Over!")
+                    .font(.system(size: 42).weight(.black))
+                    .foregroundStyle(Color.primaryAccent)
 
-            Spacer()
+                Text("Your score: \(score)")
+                    .font(.system(size: 21).weight(.bold))
+                    .foregroundStyle(Color.primaryAccent.opacity(0.6))
 
-            Button {
-                resetAction()
-            } label: {
-                Text("New game?")
-                    .padding(20)
-                    .frame(maxWidth: .infinity)
-                    .background(darkColor)
-                    .clipShape(.capsule)
+                Spacer()
+
+                Button {
+                    resetAction()
+                } label: {
+                    Text("New game?")
+                        .font(.system(size: 21).weight(.bold))
+                        .padding(20)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.primaryAccent)
+                        .clipShape(.capsule)
+                }
+                .tint(Color.secondaryAccent)
+
+                Spacer()
             }
-            .tint(lightColor)
-
-            Spacer()
+            .padding(20)
         }
-        .padding(20)
     }
 }
 

@@ -94,14 +94,10 @@ struct GameView: View {
 }
 
 #Preview {
-    let backgroundColor = Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)
+    ZStack {
+        Color.secondaryAccent
+            .ignoresSafeArea()
 
-    return (
-        ZStack {
-            Color(backgroundColor)
-                .ignoresSafeArea()
-
-            GameView(TileMatrix(), .constant(false))
-        }
-    )
+        GameView(TileMatrix(), .constant(false))
+    }
 }

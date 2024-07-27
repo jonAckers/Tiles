@@ -12,23 +12,21 @@ typealias TileColor = (background: Color, font: Color)
 struct Tile: Equatable, Identifiable {
     // MARK: - Static Properties
 
-    static let emptyColor = Color(red: 0.32, green: 0.39, blue: 0.33, opacity: 1)
-
     private static let colors: [TileColor] = [
-        /*     2 */ (Color(red: 0.90, green: 0.94, blue: 0.90, opacity: 1), Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)),
-        /*     4 */ (Color(red: 0.72, green: 0.82, blue: 0.72, opacity: 1), Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)),
-        /*     8 */ (Color(red: 0.48, green: 0.70, blue: 0.48, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*    16 */ (Color(red: 0.27, green: 0.51, blue: 0.27, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*    32 */ (Color(red: 0.17, green: 0.43, blue: 0.17, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*    64 */ (Color(red: 0.07, green: 0.44, blue: 0.07, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*   128 */ (Color(red: 0.29, green: 0.48, blue: 0.73, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*   256 */ (Color(red: 0.18, green: 0.36, blue: 0.69, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*   512 */ (Color(red: 0.09, green: 0.28, blue: 0.52, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*  1024 */ (Color(red: 0.02, green: 0.21, blue: 0.45, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*  2048 */ (Color(red: 0.22, green: 0.09, blue: 0.52, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*  4096 */ (Color(red: 0.61, green: 0.20, blue: 0.45, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /*  8192 */ (Color(red: 0.71, green: 0.25, blue: 0.11, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
-        /* 16384 */ (Color(red: 0.67, green: 0.01, blue: 0.01, opacity: 1), Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)),
+        /*     2 */ (Color.tile2, Color.alwaysDark),
+        /*     4 */ (Color.tile4, Color.alwaysDark),
+        /*     8 */ (Color.tile8, Color.alwaysLight),
+        /*    16 */ (Color.tile16, Color.alwaysLight),
+        /*    32 */ (Color.tile32, Color.alwaysLight),
+        /*    64 */ (Color.tile64, Color.alwaysLight),
+        /*   128 */ (Color.tile128, Color.alwaysLight),
+        /*   256 */ (Color.tile256, Color.alwaysLight),
+        /*   512 */ (Color.tile512, Color.alwaysLight),
+        /*  1024 */ (Color.tile1024, Color.alwaysLight),
+        /*  2048 */ (Color.tile2048, Color.alwaysLight),
+        /*  4096 */ (Color.tile4096, Color.alwaysLight),
+        /*  8192 */ (Color.tile8192, Color.alwaysLight),
+        /* 16384 */ (Color.tile16384, Color.alwaysLight),
     ]
 
     // MARK: - Properties
@@ -71,9 +69,9 @@ struct Tile: Equatable, Identifiable {
     // MARK: - Private Methods
 
     private func getColor() -> TileColor {
-        guard value > 0 else { return (Tile.emptyColor, Tile.emptyColor) }
+        guard value > 0 else { return (Color.tileEmpty, Color.tileEmpty) }
 
-        let idx = Int(log2(Double(value)))
+        let idx = Int(log2(Double(value))) - 1
 
         guard idx < Tile.colors.count else {
             return (Color.black, Color.white)

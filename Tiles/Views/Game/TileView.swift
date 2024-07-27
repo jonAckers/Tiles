@@ -16,14 +16,14 @@ struct TileView: View {
 
     var backgroundColor: Color {
         guard let tile = tile else {
-            return Tile.emptyColor
+            return .tileEmpty
         }
         return tile.backgroundColor
     }
 
     var fontColor: Color {
         guard let tile = tile else {
-            return Tile.emptyColor
+            return .tileEmpty
         }
         return tile.fontColor
     }

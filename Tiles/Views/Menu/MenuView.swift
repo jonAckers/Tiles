@@ -10,9 +10,6 @@ import SwiftUI
 struct MenuView: View {
     // MARK: - Properties
 
-    let darkColor = Color(red: 0.19, green: 0.22, blue: 0.22, opacity: 1)
-    let lightColor = Color(red: 0.96, green: 1.00, blue: 0.96, opacity: 1)
-
     let continueGameAction: () -> Void
     let newGameAction: () -> Void
     let loadScoreboardAction: () -> [ScoreData]
@@ -25,8 +22,8 @@ struct MenuView: View {
         ZStack {
             VStack {
                 Text("Tiles")
-                    .font(.system(size: 64).weight(.black))
-                    .foregroundStyle(darkColor)
+                    .font(.system(size: 96).weight(.black))
+                    .foregroundStyle(Color.primaryAccent)
                     .frame(maxWidth: .infinity)
 
                 Spacer()
@@ -39,7 +36,7 @@ struct MenuView: View {
                         .font(.system(size: 24).weight(.bold))
                         .padding(20)
                         .frame(maxWidth: .infinity)
-                        .background(Color(red: 0.48, green: 0.70, blue: 0.48, opacity: 1))
+                        .background(Color.tile8)
                         .cornerRadius(10)
                 }
                 .padding(.vertical, 10)
@@ -53,7 +50,7 @@ struct MenuView: View {
                         .font(.system(size: 24).weight(.bold))
                         .padding(20)
                         .frame(maxWidth: .infinity)
-                        .background(Color(red: 0.27, green: 0.51, blue: 0.27, opacity: 1))
+                        .background(Color.tile32)
                         .cornerRadius(10)
                 }
                 .padding(.vertical, 10)
@@ -67,7 +64,7 @@ struct MenuView: View {
                         .font(.system(size: 24).weight(.bold))
                         .padding(20)
                         .frame(maxWidth: .infinity)
-                        .background(Color(red: 0.29, green: 0.48, blue: 0.73, opacity: 1))
+                        .background(Color.tile128)
                         .cornerRadius(10)
                 }
                 .padding(.vertical, 10)
@@ -81,7 +78,7 @@ struct MenuView: View {
                 Spacer()
             }
             .padding(20)
-            .tint(lightColor)
+            .tint(Color.alwaysLight)
         }
     }
 }
