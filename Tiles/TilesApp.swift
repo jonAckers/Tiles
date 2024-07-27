@@ -19,7 +19,7 @@ struct TilesApp: App {
                 Color(backgroundColor)
                     .ignoresSafeArea()
 
-                GameView()
+                CompositeView()
             }
         }
     }

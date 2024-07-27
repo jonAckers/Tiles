@@ -10,9 +10,11 @@ import SwiftUI
 struct GameView: View {
     // MARK: - Properties
 
-    @ObservedObject var board: TileMatrix
     @State private var ignoreGestures = false
     @State private var presentEndGameModal = false
+    @Binding private var isShowingMenu: Bool
+
+    @ObservedObject var board: TileMatrix
 
     // MARK: - Drag Gesture
 
@@ -56,16 +58,17 @@ struct GameView: View {
 
     // MARK: - Initialiser
 
-    init() {
-        board = TileMatrix()
+    init(_ board: TileMatrix, _ isShowingMenu: Binding<Bool>) {
+        self.board = board
+        _isShowingMenu = isShowingMenu
     }
 
     // MARK: - Conformance to View Protocol
 
     var body: some View {
         VStack {
-            HeaderView(score: board.score)
-                .frame(maxHeight: 100)
+            HeaderView(score: board.score, isShowingMenu: $isShowingMenu)
+                .frame(maxHeight: 130)
 
             Spacer()
 
@@ -98,7 +101,7 @@ struct GameView: View {
             Color(backgroundColor)
                 .ignoresSafeArea()
 
-            GameView()
+            GameView(TileMatrix(), .constant(false))
         }
     )
 }
