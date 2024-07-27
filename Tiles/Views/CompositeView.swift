@@ -19,9 +19,9 @@ struct CompositeView: View {
         if isShowingMenu {
             MenuView(
                 continueGameAction: continueGame,
-                newGameAction: newGame
+                newGameAction: newGame,
+                loadScoreboardAction: board.loadScoreboard
             )
-            .transition(.move(edge: .top))
         } else {
             GameView(board, $isShowingMenu)
         }

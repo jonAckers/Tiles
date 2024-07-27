@@ -21,7 +21,8 @@ class TileMatrix: ObservableObject {
     let defaults = UserDefaults.standard
 
     private let BOARD_KEY = "Board"
-    private let SCORE_KEY = "Score"
+    private let SCORE_KEY = "CurrentScore"
+    private let SCOREBOARD_KEY = "Scoreboard"
 
     // MARK: - Initialiser
 
@@ -57,10 +58,15 @@ class TileMatrix: ObservableObject {
     }
 
     func reset() {
+        // Update scoreboard with current state.
+        saveScoreboard()
+
+        // Reset game.
         score = 0
         movePossible = true
         matrix = getStartingMatrix()
 
+        // Save state of new game.
         saveState()
     }
 
@@ -140,6 +146,23 @@ class TileMatrix: ObservableObject {
             }
         }
         return false
+    }
+
+    func loadScoreboard() -> [ScoreData] {
+        // Load data.
+        let data = defaults.object(forKey: SCOREBOARD_KEY) as? Data
+
+        // If data doesn't exist, return empty matrix.
+        guard let replica = data else { return [ScoreData]() }
+
+        // Decode the data.
+        let decoder = JSONDecoder()
+        if let loadedData = try? decoder.decode([ScoreData].self, from: replica) {
+            // Return scoreboard.
+            return loadedData
+        }
+
+        return [ScoreData]()
     }
 
     // MARK: - Private Methods
@@ -258,5 +281,53 @@ class TileMatrix: ObservableObject {
         let score = defaults.object(forKey: SCORE_KEY) as? Int ?? 0
 
         return (matrix, score)
+    }
+
+    private func saveScoreboard() {
+        // Create new score element.
+        let newScore = ScoreData(
+            score: score,
+            highestTile: getMaxTileValue(),
+            date: Date.now,
+            boardSize: size
+        )
+
+        // Load existing scoreboard.
+        var scoreboard = loadScoreboard()
+
+        // Update scoreboard.
+        var scoreAdded = false
+        for i in 0 ..< scoreboard.count {
+            if scoreboard[i].score < score {
+                scoreboard.insert(newScore, at: i)
+                scoreAdded = true
+                break
+            }
+        }
+        if !scoreAdded && scoreboard.count < 10 {
+            scoreboard.append(newScore)
+        }
+
+        if scoreboard.count > 10 {
+            scoreboard.remove(at: scoreboard.count - 1)
+        }
+
+        // Save data.
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(scoreboard) {
+            defaults.set(encoded, forKey: SCOREBOARD_KEY)
+        }
+    }
+
+    private func getMaxTileValue() -> Int {
+        var maxTileValue = 0
+        matrix.forEach { row in
+            row.forEach { tile in
+                if let tile = tile {
+                    maxTileValue = tile.value > maxTileValue ? tile.value : maxTileValue
+                }
+            }
+        }
+        return maxTileValue
     }
 }

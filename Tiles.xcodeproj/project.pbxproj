@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		530EAA132C45939400B3F4C7 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530EAA122C45939400B3F4C7 /* Direction.swift */; };
+		5320F3A62C55276400B5F031 /* ScoreboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5320F3A52C55276400B5F031 /* ScoreboardView.swift */; };
 		532E837A2C441D5B00E2E76B /* TilesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E83792C441D5B00E2E76B /* TilesApp.swift */; };
 		532E837E2C441D5C00E2E76B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532E837D2C441D5C00E2E76B /* Assets.xcassets */; };
 		532E83812C441D5C00E2E76B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532E83802C441D5C00E2E76B /* Preview Assets.xcassets */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		530EAA122C45939400B3F4C7 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		5320F3A52C55276400B5F031 /* ScoreboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreboardView.swift; sourceTree = "<group>"; };
 		532E83762C441D5B00E2E76B /* Tiles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tiles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		532E83792C441D5B00E2E76B /* TilesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TilesApp.swift; sourceTree = "<group>"; };
 		532E837D2C441D5C00E2E76B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				53D1D8622C551A5A00ABB8DF /* MenuView.swift */,
+				5320F3A52C55276400B5F031 /* ScoreboardView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				532E838F2C44320200E2E76B /* TileView.swift in Sources */,
 				53D1D85F2C55194B00ABB8DF /* CompositeView.swift in Sources */,
 				532E83932C446C6600E2E76B /* TileMatrix.swift in Sources */,
+				5320F3A62C55276400B5F031 /* ScoreboardView.swift in Sources */,
 				532E837A2C441D5B00E2E76B /* TilesApp.swift in Sources */,
 				53D1D8632C551A5A00ABB8DF /* MenuView.swift in Sources */,
 				53D1D8522C4C19F200ABB8DF /* AnyTransition+TileGenerated.swift in Sources */,

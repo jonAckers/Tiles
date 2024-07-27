@@ -88,7 +88,7 @@ struct TileView: View {
         ForEach(1 ... 14, id: \.self) { v in
             let val = NSDecimalNumber(decimal: pow(2, v))
             TileView(Tile(Int(truncating: val)))
-                .frame(width: 100, height: 100)
+                .frame(width: 80, height: 80)
         }
     }
 }

@@ -15,6 +15,9 @@ struct MenuView: View {
 
     let continueGameAction: () -> Void
     let newGameAction: () -> Void
+    let loadScoreboardAction: () -> [ScoreData]
+
+    @State private var isShowingScoreboard = false
 
     // MARK: - Conformance to View Protocol
 
@@ -57,9 +60,10 @@ struct MenuView: View {
                 .padding(.horizontal, 20)
 
                 Button {
-                    // Open leaderboard
+                    // Open scoreboard
+                    isShowingScoreboard.toggle()
                 } label: {
-                    Text("Leaderboard")
+                    Text("Scoreboard")
                         .font(.system(size: 24).weight(.bold))
                         .padding(20)
                         .frame(maxWidth: .infinity)
@@ -68,7 +72,9 @@ struct MenuView: View {
                 }
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
-                .disabled(true)
+                .sheet(isPresented: $isShowingScoreboard) {
+                    ScoreboardView(loadScoreboardAction())
+                }
 
                 Spacer()
                 Spacer()
@@ -81,5 +87,5 @@ struct MenuView: View {
 }
 
 #Preview {
-    MenuView(continueGameAction: {}, newGameAction: {})
+    MenuView(continueGameAction: {}, newGameAction: {}, loadScoreboardAction: { [ScoreData]() })
 }
